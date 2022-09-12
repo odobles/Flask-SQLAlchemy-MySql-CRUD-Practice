@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+
+    Flask SQL Alchemy-CRUD
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col-md-5">
+
+        {% include('partials/_message.html') %}
+
+        <div class="card-body p-4">
+            <form action="/new" method="POST" class="card bg-dark text-light p-4">
+
+                <div class="mb-3">
+                    <label for="fullname">Enter your full name:</label>
+                    <input type="text" name="fullname" placeholder="Enter your Full Name" class="form-control rounded-0 bg-dark border-0 text-white">
+                </div>
+                <div class="mb-3">
+                    <label for="email">Enter your email:</label>
+                    <input type="text" name="email" placeholder="Enter your email" class="form-control rounded-0 bg-dark border-0 text-white">
+                </div>
+                <div class="mb-3">
+                    <label for="phone">Enter your phone number:</label>
+                    <input type="text" name="phone" placeholder="Enter your phone number" class="form-control rounded-0 bg-dark border-0 text-white">
+                </div>
+            
+                <button class="btn btn-primary">Save</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="col-md-7">
+
+        {% for contact in contacts %}
+    
+        <div class="mb-1 text-white bg-dark">
+            <div class="card-body p-5">
+                <div class="d-flex justify-content-between">
+                    <h5>{{contact.fullname}}</h5>
+                    <div>
+                        <a href="{{ url_for('contacts.update_contact', id=contact.id) }}" class="btn bg-black text-white btn-sm rounder-0">Update</a>
+                        <a href="{{ url_for('contacts.delete_contact', id=contact.id) }}" class="btn btn-danger btn-sm rounder-0">Delete</a>
+                    </div>
+                </div>     
+                <p>{{contact.email}}</p>
+                <p>{{contact.phone}}</p>
+            </div>
+        </div>
+    
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}
